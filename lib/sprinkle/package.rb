@@ -236,6 +236,8 @@ module Sprinkle
       end
       
       def process_verifications(deployment, roles, pre = false)
+    	# DWH 20110407 - output command sent to server for better status and debugging
+        puts "\n======================= #{self.name} =======================\n\n"
         return if @verifications.blank?
         
         if pre

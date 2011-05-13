@@ -94,11 +94,13 @@ module Sprinkle
         end
 
         def pre_commands(stage) #:nodoc:
-          dress @pre[stage] || [], :pre
+          # DWH 20110407 - Added stage to fix bug as build directory and log don't exist yet
+          dress @pre[stage] || [], stage, :pre
         end
 
         def post_commands(stage) #:nodoc:
-          dress @post[stage] || [], :post
+          # DWH 20110407 - Added stage to fix bug as build directory and log don't exist yet
+          dress @post[stage] || [], stage, :post
         end
 
         # Concrete installers (subclasses of this virtual class) can override this method to
@@ -108,12 +110,13 @@ module Sprinkle
         # An example usage of overriding this would be to prefix all commands for a 
         # certain stage to change to a certain directory. An example is given below:
         #
-        #   def dress(commands, stage)
+        #   def dress(commands, stage, type)
         #     commands.collect { |x| "cd #{magic_beans_path} && #{x}" }
         #   end
         #
         # By default, no modifications are made to the commands.
-        def dress(commands, stage); commands; end
+        # DWH 20110407 - Added stage parameter to fix bug as build directory and log don't exist yet
+        def dress(commands, stage, type); commands; end
 
     end
   end

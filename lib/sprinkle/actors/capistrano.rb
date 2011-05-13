@@ -60,9 +60,15 @@ module Sprinkle
       def process(name, commands, roles, suppress_and_return_failures = false) #:nodoc:
         define_task(name, roles) do
           via = fetch(:run_method, :sudo)
+          # DWH 20110407 - output command sent to server for better status and debugging
+          puts ""
           commands.each do |command|
+          	# DWH 20110407 - output command sent to server for better status and debugging
+            puts "        #{command.inspect}"
             invoke_command command, :via => via
           end
+          # DWH 20110407 - output command sent to server for better status and debugging
+          puts ""
         end
         
         begin
