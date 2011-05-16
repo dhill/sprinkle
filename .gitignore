@@ -1,6 +1,4 @@
 *.gem
-pkg
-.DS_Store
-.idea
-.*.swp
-sprinkle.gemspec
+.bundle
+Gemfile.lock
+pkg/*
